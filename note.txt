@@ -1,0 +1,61 @@
+npm install cors: install package 'cors' which enables "Cross-Origin Resource Sharing" in Node.js application.
+                  CORS is security function allowing resources from 1 domain to be accessed from another domain
+                
+npm install dotenv: load environment variables from .env file into node.js application 
+                    -> Store sensitive information like API keys / database credentials
+
+
+npm install cors dotenv express nodemon openai
+--------------------------------------------------------------
+Check định nghĩa API, OpenAI API, Why use openAI api key
+
+go to https://platform.openai.com/account/api-keys (log in first)
+
+API Key is secret, ko share or expose it in client side code
+
+mine API key: -> save it in .env
+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
+--------------------------------------------------------------
+GET and POST route difference in Javascript (both dùng để handle HTTP request, sned data bt client & server)
+- Get:
+    + retrieve information
+    + data is appended to URL in form of query string
+    + GET requests visible in URL, can be bookmarked & shared
+    + process:
+        * Client construct URL with necessary parameters appended as query string
+        * Client sends HTTP GET request to server, specifying URL
+        * Server receives GET request, including para in URL
+        * Server processes request and generate response
+        * Server sends response back to client with requested data (sometimes in approriate HTML file)
+        * Client receives response
+
+- Post: 
+    + submit data to server & get response
+    + data sent in body of request, not URL -> append nothing to URL
+    + not visible in URL, cant be bookmarked or shared
+    + process:
+        * Client constructs HTTP POST request with necessary data included in request BODY
+        * Client send HTTP POST request to server with data in request body
+        * Server receive POST request with that data
+        * Process request & generate response (Vd: data received!)
+        * Server send response to client with possibly data / status information of process
+        * Client receive response
+
+-------------------------------------------
+Status:
+- 200: successful request
+- 304: not modified - website you are requesting is outdated (not a bad code)
+- 404: not found
+
+-------------------------------------------
+1 token ~ 4 character ~ 0.75 word
+temperature: 
+- control "creativity" or randomness of generated text. 0.7 ~ moderate amount of randomness
+- higher temperature -> more random & diverse text
+- lower -> more conservative
+
+-------------------------------------------
+connect client & server side
+
+npm run server
+npm run dev 
