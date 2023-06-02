@@ -37,19 +37,19 @@ app.post('/', async (req, res) => {
         //req.body: object contain data submitted in request body
         //in this case, req.body contains text input as input for OpenAI API
         const prompt = req.body.prompt;
-        //console.log('Prompt property: ', prompt);
+        console.log('Prompt property: ', prompt);
 
         //make asynchronous call to create completion of openAI API -> must wait for response before proceeding
         const response = await openai.createCompletion({ 
-            model: "text-davinci-003",
+            model: "text-davinci-002",
             prompt: `${prompt}`,
             temperature: 0,
-            max_tokens: 3000, //set high value for generation of long blocks of code
+            max_tokens: 64,
             top_p: 1,
-            frequency_penalty: 0.5, //less likely to generate repeated tokens in output
+            frequency_penalty: 0,
             presence_penalty: 0,
         });
-
+        console.log(response, 1111111111111111111111111111);
         res.status(200).send({
             //RESPONSE: object returned by openAI API, assumed to have DATA property which contains array of CHOICES 
             //in this case, only have 1 element in that array -> choose CHOICES[0]
