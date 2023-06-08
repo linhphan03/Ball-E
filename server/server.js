@@ -1,6 +1,7 @@
-import express from "express";
-import * as dotenv from "dotenv"; //load environment variables from file -> store sensitive info
-import cors from "cors";
+const express = require("express");
+const cors = require("cors");
+const dotenv = require('dotenv');; //load environment variables from file -> store sensitive info
+
 import { Configuration, OpenAIApi } from "openai";
 
 //load envir variables from env file and add them to process envir
@@ -49,7 +50,6 @@ app.post('/', async (req, res) => {
             frequency_penalty: 0,
             presence_penalty: 0,
         });
-        console.log(response, 1111111111111111111111111111);
         res.status(200).send({
             //RESPONSE: object returned by openAI API, assumed to have DATA property which contains array of CHOICES 
             //in this case, only have 1 element in that array -> choose CHOICES[0]
@@ -66,3 +66,6 @@ app.post('/', async (req, res) => {
 //start http server for our application to listen for incoming requests
 //5000: port number that server will listen on
 app.listen(5000, () => console.log('AI server started on http://localhost:5000'));
+
+mongoose.connect('mongodb://127.0.0.1:27017/GPT_Users')
+.then(() => console.log('Database GPT_Users connected!!'));
