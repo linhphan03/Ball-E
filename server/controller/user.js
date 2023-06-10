@@ -1,6 +1,12 @@
-const User = require('../models/user')
-const bcrypt = require('bcrypt');
+const User = require('../models/user');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const dotenv = require('dotenv');
 const HASH_ROUNDS = 8;
+
+dotenv.config();
+
+const SECRET_KEY = process.env.SECRET_KEY;
 
 const validatePass = ((pass, repass) => {
     /*
@@ -10,10 +16,10 @@ const validatePass = ((pass, repass) => {
         3: successful
      */
     const special = /\W/;
-    if (password.length < 8){
+    if (pass.length < 8){
         return 0;
     }
-    else if (!special.test(password)){
+    else if (!special.test(pass)){
         return 1;
     }
     else if (pass !== repass){
@@ -22,14 +28,14 @@ const validatePass = ((pass, repass) => {
     return 3;
 });
 
-const isEmailExist = (email => {User.findOne({email: email})});
-
 module.exports.signUp = async function(req, res, next){
     const email = req.body.email;
     const password = req.body.password;
     const confirmed_password = req.body.confirmed_password;
 
-    if (await isEmailExist(email)){
+    const user = await User.findOne({email}).lean();
+
+    if (user){
         res.send('Email already exists');
         return;
     }
@@ -51,24 +57,47 @@ module.exports.signUp = async function(req, res, next){
                 name: email.substring(0, email.indexOf('@'))
             }
             await User.create(newUser);
+            res.send("Sign up successful!")
             return;
     }
 }
 
 module.exports.logIn = async function(req, res, next){
-    const email = req.body.email;
-    const password = req.body.password;
+    try {
+        const email = req.body.email;
+        const password = req.body.password;
 
-    const user = await User.findOne({email: email});
+        const user = await User.findOne({email: email});
+        
+        if (!user){
+            res.send('User does not exist');
+            return;
+        }
+        const match = await bcrypt.compare(password, user.password);
+        
+        if (match){
+            var userToken = jwt.sign({id: user._id, email: user.email}, SECRET_KEY, { expiresIn: '2h'});
 
-    if (!user){
-        res.send('Email does not exist');
+            res.cookie('token', userToken, { maxAge: 2 * 60 * 60 * 1000, httpOnly: true});
+            res.send({message: 'Log in successfully!', token: userToken});
+            return;
+        }
+        res.send('Email or password is incorrect.');
         return;
     }
+    catch (error){
+        return {status: 'error', error: 'timed out'};
+    }
+}
+
+module.exports.update = async function(req, res, next){
+    const user = await User.findById({_id: req.user._id}); //req.user sent from verifyToken
     
-    const match = await bcrypt.compare(password, user.password);
-    if (match){
-        res.send('Log in successfully!');
-        return;
+    console.log(111111111111111);
+    if (user.email !== req.body.email){
+      res.send('Email can not be updated.');
+      return;
     }
+    await User.updateOne({_id: user.id}, req.body);
+    res.send({message: 'Update successfully'});
 }

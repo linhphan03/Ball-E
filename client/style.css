@@ -8,12 +8,14 @@
 }
 
 body {
-  background: yellow;
+  background: #024487;
+  overflow-y: hidden;
 }
 
 #app {
-  background-color: pink;
+  background-color: #024487;
   height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -22,7 +24,7 @@ body {
 
 #conversation_history{
   flex: 1;
-  background-color: #0d64be;
+  background-color: #012243;
   width: 5%;
   height: 100vh;
   margin-left: 0;
@@ -35,7 +37,7 @@ body {
 }
 #chat{
   flex: 6;
-  background: #ffffff;
+  background: #024487;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -44,20 +46,24 @@ body {
 }
 
 #chat_container {
-  width: 100%;
+  width: 80%;
   height: 100%;
-  overflow-y: scroll;
+  overflow-y: hidden;
 
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 20px;
+  margin: 30px auto;
 
   -ms-overflow-style: none;
   scrollbar-width: none;
 
   padding-bottom: 20px;
   scroll-behavior: smooth;
+  overflow-y: scroll;
+  overflow-x: scroll;
+
+  word-wrap: break-word;
 }
 
 /* hides scrollbar */
@@ -66,22 +72,21 @@ body {
 }
 
 .wrapper {
-  width: 100%;
-  padding: 15px;
+  padding: 30px;
 }
 
 .ai {
-  background: #ffffff;
+  background: #165798;
 }
 
-.chat {
+.chatbox {
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
 
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   gap: 10px;
 }
 
@@ -107,19 +112,22 @@ body {
   object-fit: contain;
 }
 
+.ai .message{
+  color: #ffffff;
+}
+
 .message {
   flex: 1;
   
-  color: #000000;
-  font-size: 20px;
+  color: #ffffff;
+  font-size: 22px;
+  margin-left: 20px;
+  padding-left: 15px;
+  width: fit-content;
 
-  max-width: 100%;
-  overflow-x: scroll;
-
-  white-space: pre-wrap;
+  overflow-x: hidden;
 
   -ms-overflow-style: none;
-  scrollbar-width: none;
 }
 
 /* hides scrollbar */
@@ -128,33 +136,34 @@ body {
 }
 
 #form {
-  border: 1px solid #0d64be;
-  width: 100%;
-  padding: 10px;
+  border: 1px solid #72b7fb;
+  width: 80%;
+  padding: 7px;
+  background-color: #033c75;
 }
 
 form {
   width: 100%;
   margin: 0;
   padding: 10px;
-  background: #0d64be;
+  background: #1e66ad;
 
   display: flex;
   flex-direction: row;
   gap: 0;
 }
-
 textarea {
   width: 100%;
 
   color: #ffffff;
-  font-size: 18px;
+  font-size: 19px;
 
   padding: 10px;
   background: transparent;
   border-radius: 5px;
   border: none;
   outline: none;
+  resize: none;
 }
 ::placeholder {
   color: #ffffff;

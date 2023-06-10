@@ -1,13 +1,12 @@
-const express = require("express");
-const cors = require("cors");
-const dotenv = require('dotenv');; //load environment variables from file -> store sensitive info
+const express = require('express');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const mongoose = require('mongoose');
+const { Configuration, OpenAIApi } = require('openai');
 
-import { Configuration, OpenAIApi } from "openai";
+const userRouter = require('./routes/user');
 
-//load envir variables from env file and add them to process envir
 dotenv.config(); //Loads .env file contents into process.env.
-
-//new instance for Configuration class
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY, //required to authenticate request to openAI API
 });
@@ -15,27 +14,21 @@ const configuration = new Configuration({
 //new instance for openAI API class using Configuration object
 const openai = new OpenAIApi(configuration); //make request through OpenAI API (generate text, complete prompts with GPT3...)
 
-//new instance of Express application framework & assign to variable app
 const app = express(); //define routes, middleware and other settings for application
 
-//first middleware: cors
 app.use(cors());
-//second middleware: built-in express .json middleware -> parse incoming request with JSON payloads
 app.use(express.json());
+app.use('/user', userRouter);
 
 //GET route: handle get request to root of URL after /
-//set request status to 200, then send a message to client
 app.get('/', async (req, res) => { //same as function(req, res){}
     res.status(200).send({ 
         message: "Welcome"
     })
 });
 
-//POST route:
 app.post('/', async (req, res) => {
     try{
-        //extract a prompt property
-        //req.body: object contain data submitted in request body
         //in this case, req.body contains text input as input for OpenAI API
         const prompt = req.body.prompt;
         console.log('Prompt property: ', prompt);
@@ -57,7 +50,7 @@ app.post('/', async (req, res) => {
             bot: response.data.choices[0].text
         });
     }
-    catch (error){  //catch error and provide response when sth goes wrong
+    catch (error){ 
         console.log(error);
         res.status(500).send({ error });
     }
@@ -67,5 +60,5 @@ app.post('/', async (req, res) => {
 //5000: port number that server will listen on
 app.listen(5000, () => console.log('AI server started on http://localhost:5000'));
 
-mongoose.connect('mongodb://127.0.0.1:27017/GPT_Users')
+mongoose.connect("mongodb://127.0.0.1:27017/GPT_Users")
 .then(() => console.log('Database GPT_Users connected!!'));

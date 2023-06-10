@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap");
 :root{
-    --theme-blue: #0d64be;
+    --theme-blue: #165798;
     --pure-white: #ffffff;
     --silver: silver;
     --light-grey: #adadad;
@@ -66,7 +66,6 @@ form .input_field{
     left: 0;
     width: 0%;
     height: 2px;
-    background: var(--theme-blue);
     transition: 0.5s;
 }
 .input_field input:focus ~ label,

@@ -54,14 +54,19 @@ return a string template (not regular string) because string template (a ES6 fea
 function chatStripe(isAi, value, uniqueId){
     return `
     <div class="wrapper ${isAi && 'ai'}">
-        <div class="chat">
+        <div class="chatbox">
             <div class="profile">
                 <img
                     src=${isAi ? bot : user}
                     alt=${isAi ? 'bot' : 'user'} 
                 />
             </div>
-            <div class="message" id=${uniqueId}>${value}</div>
+            
+            <div class="message" id=${uniqueId}>
+                <div class="msgText">
+                    ${value}
+                </div>
+            </div>
         </div>
     </div>
     `;
