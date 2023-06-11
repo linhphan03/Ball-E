@@ -42,13 +42,13 @@ module.exports.signUp = async function(req, res, next){
     const isPassValid = validatePass(password, confirmed_password);
     switch (isPassValid){
         case 0:
-            res.send('Password must have at least 8 characters');
+            res.send( {message: 'Password must have at least 8 characters'} );
             return;
         case 1:
-            res.send('Password must contain at least 1 special character (*+?^$...)');
+            res.send( {message: 'Password must contain at least 1 special character (*+?^$...)'} );
             return;
         case 2:
-            res.send('Password does not match');
+            res.send( {message: 'Password does not match'} );
             return;
         default: //successful sign up
             const newUser = {
@@ -57,7 +57,7 @@ module.exports.signUp = async function(req, res, next){
                 name: email.substring(0, email.indexOf('@'))
             }
             await User.create(newUser);
-            res.send("Sign up successful!")
+            res.send( {message:"Sign up successful!"} );
             return;
     }
 }
@@ -78,7 +78,7 @@ module.exports.logIn = async function(req, res, next){
         if (match){
             var userToken = jwt.sign({id: user._id, email: user.email}, SECRET_KEY, { expiresIn: '2h'});
 
-            res.cookie('token', userToken, { maxAge: 2 * 60 * 60 * 1000, httpOnly: true});
+            //res.cookie('token', userToken, { maxAge: 2 * 60 * 60 * 1000, httpOnly: true});
             res.send({message: 'Log in successfully!', token: userToken});
             return;
         }
@@ -93,11 +93,24 @@ module.exports.logIn = async function(req, res, next){
 module.exports.update = async function(req, res, next){
     const user = await User.findById({_id: req.user._id}); //req.user sent from verifyToken
     
-    console.log(111111111111111);
-    if (user.email !== req.body.email){
-      res.send('Email can not be updated.');
+    const change = req.body;
+    if (change.email == undefined){
+        change.email = user.email;
+    }
+    
+    console.log(change);
+    if (user.email !== change.email){
+      res.send('Invalid email.');
       return;
     }
-    await User.updateOne({_id: user.id}, req.body);
+    await User.updateOne({_id: user.id}, change);
     res.send({message: 'Update successfully'});
+}
+
+module.exports.updatePassword = async function(req, res, next){
+    const email = req.body.email;
+    const password = req.body.pass;
+    const confirmed_password = req.body.confirmed_password;
+
+
 }
