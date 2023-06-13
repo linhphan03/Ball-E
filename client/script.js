@@ -4,7 +4,6 @@ import user from './assets/user.png';
 
 const form = document.querySelector('form');
 const chatContainer = document.querySelector('#chat_container');
-
 let loadInterval;
 
 //loader: clear content of element and set interval function that adds a dot to text content every 300 milliseconds
@@ -141,80 +140,3 @@ form.addEventListener('keyup', (e) => { //when user 'release' (keyup) enter
         handleSubmit(e);
     }
 }); 
-
-//-------------------Log in submit---------------------
-//write API
-const onLogIn = async () => {
-    const email_LogIn = document.getElementById('#email_login');
-    const password_LogIn = document.getElementById('#password_login')
-    
-    const response = await fetch('http://localhost:5000/user/login', {
-        method: 'POST',
-        headers: {
-            'Content-type': 'application/json',
-        },
-        body: JSON.stringify({
-            //send info
-            email: email_LogIn,
-            password: password_LogIn
-        })
-    });
-
-    if (response.ok){
-        const data = await response.json();
-        const { message, token } = data;
-
-        localStorage.setItem('token', token);
-        console.log('Successful log in submission');
-    }
-    else{
-        alert('Failed to log in');
-    }
-};
-
-//-------------------Sign up submit---------------------
-const onSignUp = async () => {
-    const email_SignUp = document.getElementById('#email_signup');
-    const password_SignUp = document.getElementById('#password_signup');
-    const confirmed_password_SignUp = document.getElementById('#password_signup');
-
-    const response = await fetch('http://localhost:5000/user/signup', {
-        method: 'POST',
-        headers: {
-            'Content-type': 'application/json',
-        },
-        body: JSON.stringify({
-            //send info
-            email: email_SignUp,
-            password: password_SignUp,
-            confirmed_password: confirmed_password_SignUp
-        })
-    });
-
-    if (response.ok){
-        //TODO: redirect to log in
-
-    }
-    else{
-        alert('Failed to log in');
-    }
-};
-
-//-------------------Update information---------------------
-const update = async () => {
-    const token = localStorage.getItem('token');
-    
-    const response = await fetch('http://localhost:5000/user/update', {
-        method: 'POST',
-        headers: {
-            'Content-type': 'application/json',
-            'Authorization': token
-        },
-        body: JSON.stringify({
-            //send info
-            email: email_SignUp,
-            password: password_SignUp,
-            confirmed_password: confirmed_password_SignUp
-        })
-    });
-}

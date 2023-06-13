@@ -10,13 +10,13 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration); //make request through OpenAI API (generate text, complete prompts with GPT3...)
 
 //GET route: handle get request to root of URL after /
-router.get('', async (req, res) => {
+router.get('/', async (req, res) => {
     res.status(200).send({ 
         message: "Welcome"
     })
 });
 
-router.post('', async (req, res) => {
+router.post('/', async (req, res) => {
     try{
         //in this case, req.body contains text input as input for OpenAI API
         const prompt = req.body.prompt;

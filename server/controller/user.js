@@ -33,22 +33,27 @@ module.exports.signUp = async function(req, res, next){
     const password = req.body.password;
     const confirmed_password = req.body.confirmed_password;
 
+    if (email == undefined || password == undefined || confirmed_password == undefined){
+        res.status(500).send( {message: 'Please fill in all fields'} );
+        return;
+    }
+
     const user = await User.findOne({email}).lean();
 
     if (user){
-        res.send('Email already exists');
+        res.status(500).send('Email already exists');
         return;
     }
     const isPassValid = validatePass(password, confirmed_password);
     switch (isPassValid){
         case 0:
-            res.send( {message: 'Password must have at least 8 characters'} );
+            res.status(500).send( {message: 'Password must have at least 8 characters'} );
             return;
         case 1:
-            res.send( {message: 'Password must contain at least 1 special character (*+?^$...)'} );
+            res.status(500).send( {message: 'Password must contain at least 1 special character (*+?^$...)'} );
             return;
         case 2:
-            res.send( {message: 'Password does not match'} );
+            res.status(500).send( {message: 'Password does not match'} );
             return;
         default: //successful sign up
             const newUser = {
@@ -57,7 +62,7 @@ module.exports.signUp = async function(req, res, next){
                 name: email.substring(0, email.indexOf('@'))
             }
             await User.create(newUser);
-            res.send( {message:"Sign up successful!"} );
+            res.status(200).send( {message:"Sign up successful!"} );
             return;
     }
 }
@@ -67,22 +72,27 @@ module.exports.logIn = async function(req, res, next){
         const email = req.body.email;
         const password = req.body.password;
 
+        if (email == undefined || password == undefined){
+            res.status(500).send( {message: 'Please fill in all fields'} );
+            return;
+        }
+
         const user = await User.findOne({email: email});
-        
+        console.log(user);
         if (!user){
-            res.send('User does not exist');
+            res.status(500).send({message: 'User does not exist'});
             return;
         }
         const match = await bcrypt.compare(password, user.password);
-        
+        console.log(match)
         if (match){
             var userToken = jwt.sign({id: user._id, email: user.email}, SECRET_KEY, { expiresIn: '2h'});
 
             //res.cookie('token', userToken, { maxAge: 2 * 60 * 60 * 1000, httpOnly: true});
-            res.send({message: 'Log in successfully!', token: userToken});
+            res.status(200).send( {message: 'Log in successfully!', token: userToken} );
             return;
         }
-        res.send('Email or password is incorrect.');
+        res.status(500).send( {message: 'Email or password is incorrect.'} );
         return;
     }
     catch (error){
@@ -90,7 +100,8 @@ module.exports.logIn = async function(req, res, next){
     }
 }
 
-module.exports.update = async function(req, res, next){
+//for user to update profile
+module.exports.updateProfile = async function(req, res, next){
     const user = await User.findById({_id: req.user._id}); //req.user sent from verifyToken
     
     const change = req.body;
@@ -100,17 +111,46 @@ module.exports.update = async function(req, res, next){
     
     console.log(change);
     if (user.email !== change.email){
-      res.send('Invalid email.');
+      res.status(500).send( {message: 'Invalid email.'} );
       return;
     }
     await User.updateOne({_id: user.id}, change);
-    res.send({message: 'Update successfully'});
+    res.status(500).send( {message: 'Update successfully'} );
 }
 
+//when forgot password
 module.exports.updatePassword = async function(req, res, next){
     const email = req.body.email;
-    const password = req.body.pass;
+    const password = req.body.password;
     const confirmed_password = req.body.confirmed_password;
 
+    if (email == undefined || password == undefined || confirmed_password == undefined){
+        res.status(500).send( {message: 'Please fill in all fields'} );
+        return;
+    }
+    const user = await User.findOne({email}).lean();
 
+    if (!user){
+        res.status(500).send( {message: 'Email does not exist'} );
+        return;
+    }
+    const isPassValid = validatePass(password, confirmed_password);
+    switch (isPassValid){
+        case 0:
+            res.status(500).send( {message: 'Password must have at least 8 characters'} );
+            return;
+        case 1:
+            res.status(500).send( {message: 'Password must contain at least 1 special character (*+?^$...)'} );
+            return;
+        case 2:
+            res.status(500).send( {message: 'Password does not match'} );
+            return;
+        default: //successful sign up
+            const passwordUpdate = {
+                password: await bcrypt.hash(password, HASH_ROUNDS),
+            }
+            await User.updateOne({email: email}, passwordUpdate);
+            res.status(200).send( {message:"Your password has been updated."} );
+            return;
+    }    
 }

@@ -27,7 +27,7 @@ router.post('/login', userController.logIn);
 router.post('/signup', userController.signUp);
 
 //update user information in user profile -> need to verify token
-router.put('/update', verifyToken, userController.update);
+router.put('/update/profile', verifyToken, userController.updateProfile);
 
 //update when forgetting password
 router.put('/update/password', userController.updatePassword);

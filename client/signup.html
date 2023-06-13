@@ -11,23 +11,24 @@
   <body>
     <div class="form">
         <h1>Sign Up</h1>
+        <p id="message"></p>
         <form method="post">
             <div class="input_field">
-                <input type="email" id="email_signup" required />
+                <input type="email" id="email_signup" />
                 <span></span>
                 <label>Email address</label>
             </div>
             <div class="input_field">
-                <input type="password" id="password_signup" required />
+                <input type="password" id="password_signup" />
                 <span></span>
                 <label>Password</label>
             </div>
             <div class="input_field">
-                <input type="password" id="confirmed_password_signup" required />
+                <input type="password" id="confirmed_password_signup" />
                 <span></span>
                 <label>Confirm your password</label>
             </div>
-            <input type="submit" value="Sign up" />
+            <button type="button" onclick="onSignUp()">Sign Up</button>
             <div class="signup_link">Already a member? <a href="login.html">Log in</a></div>
             <p class="social_media"><span>or</span></p>
             <div class="continue-btn">
@@ -38,4 +39,6 @@
             </div>
           </form>
     </div>
+    <script type="module" src="account.js"></script>
   </body>
+</html>
