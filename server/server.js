@@ -10,7 +10,7 @@ const server = express();
 server.use(cors());
 server.use(express.json());
 server.use('/user', userRouter);
-server.use('/chatbot', chatbotRouter);
+server.use('/', chatbotRouter);
 
 //start http server for our application to listen for incoming requests
 //5000: port number that server will listen on

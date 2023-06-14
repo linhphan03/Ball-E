@@ -37,6 +37,7 @@ module.exports.signUp = async function(req, res, next){
         res.status(500).send( {message: 'Please fill in all fields'} );
         return;
     }
+    console.log(email, password);
 
     const user = await User.findOne({email}).lean();
 

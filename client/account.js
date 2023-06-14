@@ -4,7 +4,6 @@ const onLogIn = async (e) => {
     
     const email_LogIn = document.getElementById('email_login').value;
     const password_LogIn = document.getElementById('password_login').value;
-    console.log(email_LogIn, password_LogIn)
 
     const response = await fetch('http://localhost:5000/user/login', {
         method: 'POST',
@@ -23,7 +22,8 @@ const onLogIn = async (e) => {
         const { message, token } = data;
         localStorage.setItem('token', token);
         console.log('Successful log in submission');
-        alert('log in ok');
+        //alert('log in ok');
+        window.location.replace('chatbot.html');
     }
     else{
         const {message} = data;
@@ -33,9 +33,11 @@ const onLogIn = async (e) => {
 
 //-------------------Sign up submit---------------------
 const onSignUp = async () => {
-    const email_SignUp = document.getElementById('email_signup');
-    const password_SignUp = document.getElementById('password_signup');
-    const confirmed_password_SignUp = document.getElementById('password_signup');
+    const email_SignUp = document.getElementById('email_signup').value;
+    const password_SignUp = document.getElementById('password_signup').value;
+    const confirmed_password_SignUp = document.getElementById('password_signup').value;
+
+    console.log(email_SignUp);
 
     const response = await fetch('http://localhost:5000/user/signup', {
         method: 'POST',
@@ -52,8 +54,7 @@ const onSignUp = async () => {
 
     const data = await response.json();
     if (response.ok){
-        //TODO: redirect to log in
-
+        window.location.replace('login.html');
     }
     else{
         const {message} = data;
@@ -64,25 +65,30 @@ const onSignUp = async () => {
 //-------------------Update information---------------------
 const onUpdatePassword = async () => {
     const token = localStorage.getItem('token');
+
+    const email_Update = document.getElementById('email_update').value;
+    const password_Update = document.getElementById('password_update').value;
+    const confirmed_password_Update = document.getElementById('password_update').value;
     
+    console.log(email_Update, password_Update, confirmed_password_Update);
+
     const response = await fetch('http://localhost:5000/user/update/password', {
-        method: 'POST',
+        method: 'PUT',
         headers: {
             'Content-type': 'application/json',
             'Authorization': token
         },
         body: JSON.stringify({
             //send info
-            email: email_SignUp,
-            password: password_SignUp,
-            confirmed_password: confirmed_password_SignUp
+            email: email_Update,
+            password: password_Update,
+            confirmed_password: confirmed_password_Update
         })
     });
 
     const data = await response.json();
     if (response.ok){
-        //TODO: redirect to log in
-
+        window.location.replace('login.html');
     }
     else{
         const {message} = data;

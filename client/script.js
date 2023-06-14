@@ -117,18 +117,24 @@ const handleSubmit = async (e) => {
     clearInterval(loadInterval); //clear loadingInterval (line 8) if one is present
     messageDiv.innerHTML = ""; //clear msg of div element that will be used to display msg from chatbot
 
+    console.log(response.status);
+
     if (response.ok){ //if response from API is sucessful
         //read response from API as JSON object and stores in data variable
         const data = await response.json();
         const parsedData = data.bot.trim(); //extract msg from API response
         //take parsedData and add to messageDiv HTML
         typeText(messageDiv, parsedData)
+        return;
     }
-    else{ //response not ok -> error
-        const err = await response.text();
-        messageDiv.innerHTML = "Something went wrong";
-        alert(err); //alert error to user if API calls fail
+    const err = await response.json();
+
+    if (err.error.status == 429){
+        messageDiv.innerHTML = 'You exceeded your current quota, please check your plan and billing details.';
+        return;
     }
+
+    messageDiv.innerHTML = 'Something went wrong';
 }
 
 //listen for user input in a form
