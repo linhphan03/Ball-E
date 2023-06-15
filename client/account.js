@@ -5,7 +5,7 @@ const onLogIn = async (e) => {
     const email_LogIn = document.getElementById('email_login').value;
     const password_LogIn = document.getElementById('password_login').value;
 
-    const response = await fetch('http://localhost:5000/user/login', {
+    const response = await fetch('https://chatgpt-server-liart.vercel.app/user/login', {
         method: 'POST',
         headers: {
             'Content-type': 'application/json',
@@ -39,7 +39,7 @@ const onSignUp = async () => {
 
     console.log(email_SignUp);
 
-    const response = await fetch('http://localhost:5000/user/signup', {
+    const response = await fetch('https://chatgpt-server-liart.vercel.app/user/signup', {
         method: 'POST',
         headers: {
             'Content-type': 'application/json',
@@ -64,7 +64,7 @@ const onSignUp = async () => {
 
 //-------------------Update information---------------------
 const onUpdatePassword = async () => {
-    const token = localStorage.getItem('token');
+const token = localStorage.getItem('token');
 
     const email_Update = document.getElementById('email_update').value;
     const password_Update = document.getElementById('password_update').value;
@@ -72,7 +72,7 @@ const onUpdatePassword = async () => {
     
     console.log(email_Update, password_Update, confirmed_password_Update);
 
-    const response = await fetch('http://localhost:5000/user/update/password', {
+    const response = await fetch('https://chatgpt-server-liart.vercel.app/user/update/password', {
         method: 'PUT',
         headers: {
             'Content-type': 'application/json',
@@ -95,3 +95,19 @@ const onUpdatePassword = async () => {
         document.querySelector("#message").innerHTML = message;
     }
 }
+
+const signup = document.getElementById('signup_btn')
+if (signup) {
+    signup.addEventListener('click', onSignUp)
+}
+
+const login_btn = document.getElementById('login_btn')
+if (login_btn) {
+    login_btn.addEventListener('click', onLogIn)
+}
+
+const password_btn = document.getElementById('password_btn')
+if (password_btn) {
+    password_btn.addEventListener('click', onUpdatePassword)
+}
+

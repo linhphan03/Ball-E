@@ -102,7 +102,7 @@ const handleSubmit = async (e) => {
     //connect client and server side
     //make http request to URL http://localhost:5000/
     //(await) wait for response from server before moving on to next line of code
-    const response = await fetch('http://localhost:5000', {
+    const response = await fetch('https://chatgpt-server-liart.vercel.app', {
         //request use http post method to send data to server
         method: 'POST',
         headers: {

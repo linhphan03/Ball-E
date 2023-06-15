@@ -16,5 +16,5 @@ server.use('/', chatbotRouter);
 //5000: port number that server will listen on
 server.listen(5000, () => console.log('AI server started on http://localhost:5000'));
 
-mongoose.connect("mongodb://127.0.0.1:27017/GPT_Users")
+mongoose.connect(process.env.DB_URL || "mongodb://127.0.0.1:27017/GPT_Users")
 .then(() => console.log('Database GPT_Users connected!!'));
