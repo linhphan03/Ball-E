@@ -90,7 +90,7 @@ module.exports.logIn = async function(req, res, next){
             var userToken = jwt.sign({id: user._id, email: user.email}, SECRET_KEY, { expiresIn: '2h'});
 
             //res.cookie('token', userToken, { maxAge: 2 * 60 * 60 * 1000, httpOnly: true});
-            res.status(200).send( {message: 'Log in successfully!', token: userToken} );
+            res.status(200).send( {message: 'Log in successfully!', token: userToken, name: user.name} );
             return;
         }
         res.status(500).send( {message: 'Email or password is incorrect.'} );

@@ -14,16 +14,19 @@ const onLogIn = async (e) => {
             //send info
             email: email_LogIn,
             password: password_LogIn
+
         })
     });
     const data = await response.json();
 
     if (response.ok){
-        const { message, token } = data;
+        const { message, token, name } = data;
         localStorage.setItem('token', token);
+        localStorage.setItem('name', name);
+
         console.log('Successful log in submission');
         //alert('log in ok');
-        window.location.replace('chatbot.html');
+        window.location.href = 'chatbot.html';
     }
     else{
         const {message} = data;
@@ -54,7 +57,7 @@ const onSignUp = async () => {
 
     const data = await response.json();
     if (response.ok){
-        window.location.replace('login.html');
+        window.location.href = 'login.html';
     }
     else{
         const {message} = data;
@@ -88,7 +91,7 @@ const token = localStorage.getItem('token');
 
     const data = await response.json();
     if (response.ok){
-        window.location.replace('login.html');
+        window.location.href = 'login.html';
     }
     else{
         const {message} = data;
@@ -96,14 +99,14 @@ const token = localStorage.getItem('token');
     }
 }
 
-const signup = document.getElementById('signup_btn')
-if (signup) {
-    signup.addEventListener('click', onSignUp)
+const signup_btn = document.getElementById('signup_btn');
+if (signup_btn) {
+    signup_btn.addEventListener('click', onSignUp)
 }
 
-const login_btn = document.getElementById('login_btn')
+const login_btn = document.getElementById('login_btn');
 if (login_btn) {
-    login_btn.addEventListener('click', onLogIn)
+    login_btn.addEventListener('click', onLogIn);
 }
 
 const password_btn = document.getElementById('password_btn')

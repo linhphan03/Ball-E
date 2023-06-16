@@ -1,6 +1,13 @@
 //import icon from assets
 import bot from './assets/bot.png';
-import user from './assets/user.png';
+import ava1 from './assets/ava1.png';
+import ava2 from './assets/ava2.png';
+import ava3 from './assets/ava3.png';
+import ava4 from './assets/ava4.png';
+import ava5 from './assets/ava5.png';
+import ava6 from './assets/ava6.png';
+
+const images = [ava1, ava2, ava3, ava4, ava5, ava6];
 
 const form = document.querySelector('form');
 const chatContainer = document.querySelector('#chat_container');
@@ -51,12 +58,19 @@ function generateUniqueId(){
 return a string template (not regular string) because string template (a ES6 feature with `{}`) creates chat bubble with profile image
 */
 function chatStripe(isAi, value, uniqueId){
+    const name = localStorage.getItem('name');
+    console.log(name.length, '....................',name);
+    console.log(images);
+
+    const ava = images[name.length % images.length];
+    console.log(ava);
+
     return `
     <div class="wrapper ${isAi && 'ai'}">
         <div class="chatbox">
             <div class="profile">
                 <img
-                    src=${isAi ? bot : user}
+                    src=${isAi ? bot : ava}
                     alt=${isAi ? 'bot' : 'user'} 
                 />
             </div>
