@@ -5,7 +5,7 @@ const onLogIn = async (e) => {
     const email_LogIn = document.getElementById('email_login').value;
     const password_LogIn = document.getElementById('password_login').value;
 
-    const response = await fetch('https://chatgpt-server-liart.vercel.app/user/login', {
+    const response = await fetch('https://chatgpt-server-liart.vercel.app/auth/login', {
         method: 'POST',
         headers: {
             'Content-type': 'application/json',
@@ -25,7 +25,6 @@ const onLogIn = async (e) => {
         localStorage.setItem('name', name);
 
         console.log('Successful log in submission');
-        //alert('log in ok');
         window.location.href = 'chatbot.html';
     }
     else{
@@ -42,7 +41,7 @@ const onSignUp = async () => {
 
     console.log(email_SignUp);
 
-    const response = await fetch('https://chatgpt-server-liart.vercel.app/user/signup', {
+    const response = await fetch('https://chatgpt-server-liart.vercel.app/auth/signup', {
         method: 'POST',
         headers: {
             'Content-type': 'application/json',
@@ -57,7 +56,7 @@ const onSignUp = async () => {
 
     const data = await response.json();
     if (response.ok){
-        window.location.href = 'login.html';
+        //window.location.href = 'login.html';
     }
     else{
         const {message} = data;
@@ -75,7 +74,7 @@ const token = localStorage.getItem('token');
     
     console.log(email_Update, password_Update, confirmed_password_Update);
 
-    const response = await fetch('https://chatgpt-server-liart.vercel.app/user/update/password', {
+    const response = await fetch('https://chatgpt-server-liart.vercel.app/auth/update/password', {
         method: 'PUT',
         headers: {
             'Content-type': 'application/json',
@@ -101,7 +100,7 @@ const token = localStorage.getItem('token');
 
 const signup_btn = document.getElementById('signup_btn');
 if (signup_btn) {
-    signup_btn.addEventListener('click', onSignUp)
+    signup_btn.addEventListener('click', onSignUp);
 }
 
 const login_btn = document.getElementById('login_btn');
@@ -111,6 +110,6 @@ if (login_btn) {
 
 const password_btn = document.getElementById('password_btn')
 if (password_btn) {
-    password_btn.addEventListener('click', onUpdatePassword)
+    password_btn.addEventListener('click', onUpdatePassword);
 }
 

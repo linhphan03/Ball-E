@@ -6,26 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ChatGPT</title>
     <link rel="stylesheet" href="chatbot.css">
+    <link rel="stylesheet" href="icon.css">
   </head>
   <body>
     <div id="app">
-      <div id="conversation_history">
-        <!-- Filled in js -->
-        
+      <div id="chat_choice">
+        <button id="emoji_to_story" onclick="emojiKeyMode()">Emoji to story</button>
+        <button id="default_conversation" onclick="defaultMode()">Default</button>
       </div>
       <div id="chat">
         <div id="chat_container">
-          <!-- Filled in js -->
+          <!-- Filled in chatbot.js -->
+        </div>
+        <div id="emoji_keyboard">
+          <!-- Filled in icon.js -->
         </div>
         <div id="form">
           <form action="">
-            <textarea name="prompt" id="" cols="1" rows="1" placeholder="Send a message"></textarea>
+            <textarea name="prompt" id="textarea" cols="1" rows="1" placeholder="Send a message"></textarea>
             <button type="submit">
-              <img src="assets/send.png" alt=""></button>
+              <img src="assets/send.png" alt="">
+            </button>
           </form>
         </div>
       </div>
     </div>
-    <script type="module" src="chatbot.js"></script>
+    <script src="iconList.js"></script>
+    <script src="emoji_func.js"></script>
+    <script src="chatMode.js"></script>
+    <script type="module" src="default_func.js"></script>
+    <script src="https://kit.fontawesome.com/d9a2d2c8d8.js" crossorigin="anonymous"></script>
   </body>
 </html>

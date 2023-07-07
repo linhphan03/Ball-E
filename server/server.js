@@ -7,9 +7,15 @@ const chatbotRouter = require('./routes/chatbot');
 
 const server = express();
 
+server.all('/', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "*");
+    next()
+});
+
 server.use(cors());
 server.use(express.json());
-server.use('/user', userRouter);
+server.use('/auth', userRouter);
 server.use('/', chatbotRouter);
 
 //start http server for our application to listen for incoming requests

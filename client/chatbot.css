@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100&family=Inter:wght@200;400;600;800&display=swap');
 
+:root{
+  --chat-background: #165696;
+  --ai-background: #21609f;
+  --chat-choice-background: #012243;
+  --chat-choice-border: #72b7fb;
+  --form-background: #033c75;
+  --text-background: #2c73ba;
+}
 * {
   margin: 0;
   padding: 0;
@@ -8,12 +16,12 @@
 }
 
 body {
-  background: #024487;
+  background: var(--chat-background);
   overflow-y: hidden;
 }
 
 #app {
-  background-color: #024487;
+  background-color: var(--chat-background);
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -22,22 +30,43 @@ body {
   justify-content: space-between;
 }
 
-#conversation_history{
+#chat_choice{
   flex: 1;
-  background-color: #012243;
+  background-color: var(--chat-choice-background);
   width: 5%;
   height: 100vh;
   margin-left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
 }
 
-@media screen and (max-width: 670px){
-  #conversation_history{
+#chat_choice button{
+  font-size: 20px;
+  color: #FFFFFF;
+  border: 1px solid var(--chat-choice-border);
+  border-radius: 8px;
+  padding: 8px;
+  margin: 12px auto;
+  width: 150px;
+}
+
+@media screen and (max-width: 960px){
+  #chat_choice{
+    flex: 1.5;
+  } 
+}
+
+@media screen and (max-width: 768px){
+  #chat_choice{
     display: none;
   }
 }
+
 #chat{
   flex: 6;
-  background: #024487;
+  background: var(--chat-background);
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -76,7 +105,7 @@ body {
 }
 
 .ai {
-  background: #165798;
+  background: var(--ai-background);
 }
 
 .chatbox {
@@ -136,17 +165,17 @@ body {
 }
 
 #form {
-  border: 1px solid #72b7fb;
+  border: 1px solid var(--chat-choice-border);
   width: 80%;
   padding: 7px;
-  background-color: #033c75;
+  background-color: var(--form-background);
 }
 
 form {
   width: 100%;
   margin: 0;
   padding: 10px;
-  background: #1e66ad;
+  background: var(--text-background);
 
   display: flex;
   flex-direction: row;
@@ -156,7 +185,7 @@ textarea {
   width: 100%;
 
   color: #ffffff;
-  font-size: 19px;
+  font-size: 20px;
 
   padding: 10px;
   background: transparent;
@@ -164,6 +193,8 @@ textarea {
   border: none;
   outline: none;
   resize: none;
+
+  overflow-y: hidden;
 }
 ::placeholder {
   color: #ffffff;
@@ -180,4 +211,8 @@ button {
 form img {
   width: 30px;
   height: 30px;
+}
+
+#emoji_keyboard{
+  display: none;
 }

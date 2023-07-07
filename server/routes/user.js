@@ -22,8 +22,10 @@ function verifyToken(req, res, next) {
     }
 }
 
+//log in
 router.post('/login', userController.logIn);
 
+//sign up
 router.post('/signup', userController.signUp);
 
 //update user information in user profile -> need to verify token
@@ -31,5 +33,10 @@ router.put('/update/profile', verifyToken, userController.updateProfile);
 
 //update when forgetting password
 router.put('/update/password', userController.updatePassword);
+
+//verify email
+router.get('/verify/:email/:hashedEmail', userController.verify);
+
+// router.get('/verify/mail', userController.mail)
 
 module.exports = router;

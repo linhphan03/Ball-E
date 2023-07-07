@@ -11,12 +11,15 @@ const images = [ava1, ava2, ava3, ava4, ava5, ava6];
 
 const form = document.querySelector('form');
 const chatContainer = document.querySelector('#chat_container');
+const name = localStorage.getItem('name');
+const ava = images[name.length % images.length];
+
 let loadInterval;
 
 //loader: clear content of element and set interval function that adds a dot to text content every 300 milliseconds
 //if there are 3 dots, reset to empty string
 //purpose: 3 dots loading when GPT is giving answer
-function loader(element) { //element is HTML
+const loader = (element) => { //element is HTML
     element.textContent = '';
     loadInterval = setInterval(() => {
         element.textContent += '.';
@@ -28,7 +31,7 @@ function loader(element) { //element is HTML
 }
 
 //typeText: add 1 character to inner HTML of element until entire text is added
-function typeText(element, text){
+const typeText = (element, text) => {
     let index = 0;
     let interval = setInterval(() => {
         if (index < text.length){
@@ -43,7 +46,7 @@ function typeText(element, text){
 
 //generate unique ID for each message
 //usually id = current time & date + a randomly generated hexadecimal string
-function generateUniqueId(){
+const generateUniqueId = () => {
     const timeStamp = Date.now();
     const randNumber = Math.random();
     const hexadecString = randNumber.toString(16); //convert randNumber to hexadecimal, and then convert to String type
@@ -57,14 +60,7 @@ function generateUniqueId(){
     - uniqueId: unique identifier for message
 return a string template (not regular string) because string template (a ES6 feature with `{}`) creates chat bubble with profile image
 */
-function chatStripe(isAi, value, uniqueId){
-    const name = localStorage.getItem('name');
-    console.log(name.length, '....................',name);
-    console.log(images);
-
-    const ava = images[name.length % images.length];
-    console.log(ava);
-
+const chatStripe = (isAi, value, uniqueId) => {
     return `
     <div class="wrapper ${isAi && 'ai'}">
         <div class="chatbox">
