@@ -32,6 +32,8 @@ router.post('/', async (req, res) => {
             frequency_penalty: 0,
             presence_penalty: 0,
         });
+        console.log(response);
+        
         res.status(200).send({
             //RESPONSE: object returned by openAI API, assumed to have DATA property which contains array of CHOICES 
             //in this case, only have 1 element in that array -> choose CHOICES[0]

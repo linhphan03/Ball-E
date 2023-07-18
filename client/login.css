@@ -1,23 +1,28 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap");
 :root{
-    --theme-blue: #165798;
+    --theme-blue: #1B63AC;
     --pure-white: #ffffff;
     --silver: silver;
     --light-grey: #adadad;
+    --button-hover-blue: #1a548e;
 }
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "Noto Sans", sans-serif;
 }
+
 body{
     background: var(--theme-blue);
     height: 100vh;
 }
+
 a{
     text-decoration: none;
 }
+
 .form{
     position: absolute;
     top: 50%;
@@ -29,25 +34,30 @@ a{
     border-radius: 10px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
 }
+
 .form h1{
     text-align: center;
     padding-top: 20px;
     padding-bottom: 10px;
 }
+
 .form #message{
     color: #d52e29;
     text-align: center;
     font-weight: bold;
 }
+
 .form form{
     padding: 0 30px;
     box-sizing: border-box;
 }
+
 form .input_field{
     position: relative;
     border-bottom: 2px solid var(--light-grey);
     margin: 30px 0;
 }
+
 .input_field input{
     width: 100%;
     padding: 0 5px;
@@ -57,6 +67,7 @@ form .input_field{
     background: none;
     outline: none;
 }
+
 .input_field label {
     position: absolute;
     top: 50%;
@@ -67,6 +78,7 @@ form .input_field{
     pointer-events: none;
     transition: 0.5s;
 }
+
 .input_field span::before {
     content: "";
     position: absolute;
@@ -76,29 +88,35 @@ form .input_field{
     height: 2px;
     transition: 0.5s;
 }
+
 .input_field input:focus ~ label,
 .input_field input:focus ~ label,
 input:valid ~ label {
 top: -5px;
 color: var(--theme-blue);
 }
+
 .input_field input:focus ~ span::before,
 .input_field input:valid ~ span::before {
 width: 100%;
 }
+
 .forgot {
     margin: -5px 0 20px 5px;
     cursor: pointer;
     font-size: 12px;
     color: #a6a6a6;
 }
+
 .forgot a{
     color: #a6a6a6;
 }
+
 .forgot:hover {
 text-decoration: underline;
 }
-button[type="button"] {
+
+#login_btn {
 width: 100%;
 height: 50px;
 background: var(--theme-blue);
@@ -111,22 +129,36 @@ outline: none;
 transition: 0.5s;
 border: none;
 }
+
+#login_btn:hover{
+    background-color: #1a548e;
+    cursor: pointer;
+}
+
+#login_btn:active{
+    border: 1px solid black;
+}
+
 input[type="submit"]:hover {
 border-color: var(--theme-blue);
 }
+
 .signup_link {
 margin: 20px 0;
 text-align: center;
 font-size: 16px;
 color: #666666;
 }
+
 .signup_link a {
 color: var(--theme-blue);
 text-decoration: none;
 }
+
 .signup_link a:hover {
 text-decoration: underline;
 }
+
 .social_media{
     display: flex;
     flex-basis: 100%;
@@ -135,6 +167,7 @@ text-decoration: underline;
     margin: 5px auto;
     width: 60%;
 }
+
 .social_media::before,
 .social_media::after{
     content: "";
@@ -145,6 +178,7 @@ text-decoration: underline;
     line-height: 0px;
     margin: 0px 10px;
 }
+
 .continue-btn{
     display: flex;
     justify-content: space-around;
@@ -155,6 +189,7 @@ text-decoration: underline;
     margin: 5px auto;
     margin-bottom: 25px;
 }
+
 .icon-wrapper {
     flex: 1;
     margin-top: 1px;
@@ -163,12 +198,14 @@ text-decoration: underline;
     height: 40px;
     border-radius: 2px;
 }
+
 .icon {
     margin-top: 11px;
     margin-left: 11px;
     width: 18px;
     height: 18px;
 }
+
 .btn-text {
     flex: 5;
     margin: 11px 11px auto;

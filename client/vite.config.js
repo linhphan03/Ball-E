@@ -8,7 +8,7 @@ module.exports = defineConfig({
         login: './login.html',
         signup: './signup.html',
         chatbot: './chatbot.html',
-        updatePassword: './updatePassword.html',
+        updatePassword: './updatePassword.html'
       }
     }
   }

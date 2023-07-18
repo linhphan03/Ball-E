@@ -215,4 +215,71 @@ form img {
 
 #emoji_keyboard{
   display: none;
+  width: 80%;
+}
+
+
+#emoji_input_outer{
+  border: 1px solid #72b7fb;
+  background-color: #033c75;
+  height: 80px;
+  padding: 7px;
+  margin: 10px 0;
+}
+
+#emoji_input{
+  height: 100%;
+  padding: 10px;
+  background: #2c73ba;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#erase_button{
+  background-color: #ffffff;
+  border-radius: 8px;
+  width: 42px;
+  height: 40px;
+  margin-right: 18px;
+  font-size: 20px;
+}
+
+#emoji_button{
+  display: flex;
+  justify-content: flex-end;
+  margin: 15px 0;
+}
+
+#reset_button{
+  background-color: #ffffff;
+  border-radius: 8px;
+  width: 45px;
+  height: 40px;
+  margin-right: 18px;
+  font-size: 18px;
+}
+
+#create_story_button{
+  background-color: #ffffff;
+  border-radius: 8px;
+  width: 120px;
+  height: 40px;
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 0px;
+  padding: 0 10px;
+}
+
+#all_icons{
+  margin: 25px 0;
+  border: 1px solid #ffffff;
+  padding: 10px 4.5%;
+}
+
+#keyboard{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
