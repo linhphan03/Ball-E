@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 module.exports.sendMail = async (to, subject, htmlContent) => {
-    console.log('sendMail', to, subject, htmlContent);
+    // console.log('sendMail', to, subject, htmlContent);
     try {
         const transport = nodeMailer.createTransport({
             host: mailConfig.HOST,

@@ -6,6 +6,7 @@ const onLogIn = async (e) => {
     const password_LogIn = document.getElementById('password_login').value;
 
     const response = await fetch('https://chatgpt-server-liart.vercel.app/auth/login', {
+    // const response = await fetch('http://localhost:5000/auth/login', {
         method: 'POST',
         headers: {
             'Content-type': 'application/json',
@@ -39,9 +40,8 @@ const onSignUp = async () => {
     const password_SignUp = document.getElementById('password_signup').value;
     const confirmed_password_SignUp = document.getElementById('password_signup').value;
 
-    console.log(email_SignUp);
-
     const response = await fetch('https://chatgpt-server-liart.vercel.app/auth/signup', {
+    // const response = await fetch('http://localhost:5000/auth/signup', {
         method: 'POST',
         headers: {
             'Content-type': 'application/json',
@@ -72,10 +72,9 @@ const token = localStorage.getItem('token');
     const password_Update = document.getElementById('password_update').value;
     const confirmed_password_Update = document.getElementById('password_update').value;
     
-    console.log(email_Update, password_Update, confirmed_password_Update);
-
     const response = await fetch('https://chatgpt-server-liart.vercel.app/auth/update/password', {
-        method: 'PUT',
+    // const response = await fetch('http://localhost:5000/auth/update/password', {
+        method: 'POST',
         headers: {
             'Content-type': 'application/json',
             'Authorization': token
@@ -90,10 +89,11 @@ const token = localStorage.getItem('token');
 
     const data = await response.json();
     if (response.ok){
-        window.location.href = 'login.html';
+        // window.location.href = 'login.html';
     }
     else{
         const {message} = data;
+        console.log(message);
         document.querySelector("#message").innerHTML = message;
     }
 }

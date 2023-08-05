@@ -25,18 +25,19 @@ function verifyToken(req, res, next) {
 //log in
 router.post('/login', userController.logIn);
 
-//sign up
+// //sign up
 router.post('/signup', userController.signUp);
 
-//update user information in user profile -> need to verify token
-router.put('/update/profile', verifyToken, userController.updateProfile);
+// //update user information in user profile -> need to verify token
+// router.put('/update/profile', verifyToken, userController.updateProfile);
 
 //update when forgetting password
-router.put('/update/password', userController.updatePassword);
+router.post('/update/password', userController.updatePassword);
 
-//verify email
-router.get('/verify/:email/:hashedEmail', userController.verify);
+//verify email for signing up
+router.get('/verify/:email/:encodedEmail', userController.verify);
 
-// router.get('/verify/mail', userController.mail)
+//verify email for updating password
+router.get('/reset/:email/:encodedEmail', userController.resetPassword);
 
 module.exports = router;
