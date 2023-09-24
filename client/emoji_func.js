@@ -122,7 +122,7 @@ document.getElementById("create_story_button").addEventListener("click", async (
     
     if (emoji_input.children.length > 0){
 
-        let prompt = "Create a maximum 200-word story with these keywords: ";
+        let prompt = "Create a maximum 100-word story with these keywords: ";
 
         for (let i = 0; i < emoji_input.children.length; i++){
             //console.log(emoji_input[i]);
@@ -143,7 +143,6 @@ document.getElementById("create_story_button").addEventListener("click", async (
         //make http request to URL http://localhost:5000/
         //(await) wait for response from server before moving on to next line of code
         const response = await fetch('https://chatgpt-server-liart.vercel.app', {
-        // const response = await fetch('http://localhost:5000', {
             //request use http post method to send data to server
             method: 'POST',
             headers: {

@@ -25,4 +25,4 @@ server.use('/', chatbotRouter);
 server.listen(5000, () => console.log('AI server started on http://localhost:5000'));
 
 mongoose.connect(DB_URL)
-.then(() => console.log(`Database GPT_Users connected at ${DB_URL}`));
+.then(() => console.log('Connected'));

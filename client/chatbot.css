@@ -141,10 +141,6 @@ body {
   object-fit: contain;
 }
 
-.ai .message{
-  color: #ffffff;
-}
-
 .message {
   flex: 1;
   
