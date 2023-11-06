@@ -122,10 +122,9 @@ document.getElementById("create_story_button").addEventListener("click", async (
     
     if (emoji_input.children.length > 0){
 
-        let prompt = "Create a maximum 100-word story with these keywords: ";
+        let prompt = "Create a story with these keywords: ";
 
         for (let i = 0; i < emoji_input.children.length; i++){
-            //console.log(emoji_input[i]);
             let nextID = emoji_input.children[i].id;
             prompt += allIcons[nextID] + ", ";
         }
@@ -166,6 +165,7 @@ document.getElementById("create_story_button").addEventListener("click", async (
             return;
         }
         const err = await response.json();
+        console.log("Meoemeoeo", response)
     
         if (err.error.status == 429){
             messageDiv.innerHTML = "You exceeded your current quota, please check your plan and billing details.";

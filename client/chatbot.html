@@ -7,12 +7,15 @@
     <title>Ball-E | A talkie ball for your goal</title>
     <link rel="stylesheet" href="chatbot.css">
     <link rel="stylesheet" href="icon.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"> </script>
   </head>
   <body>
     <div id="app">
       <div id="chat_choice">
         <button id="emoji_to_story">Emoji to story</button>
         <button id="default_conversation">Default</button>
+        <button id="object_detection">Object detection</button>
       </div>
       <div id="chat">
         <div id="chat_container">
@@ -20,6 +23,26 @@
         </div>
         <div id="emoji_keyboard">
           <!-- Filled in icon.js -->
+        </div>
+        <div id="object_detection_container">
+          <div id="dropzone" class="dropzone">
+            <div id="dropzone-content">
+              <svg class="upload-icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+              </svg>
+              <div>
+                <span><b>Click to upload</b> or drag and drop</span>
+              </div>
+            </div>
+            <div id="loading-icon">
+              <img width="128px" src="https://media.tenor.com/FawYo00tBekAAAAC/loading-thinking.gif" />
+            </div>
+            <input type="file" id="file-input">
+          </div>
+          <div id="uploaded-image-container">
+            <div id="uploaded-image-content"></div>
+            <button class="button" id="re-upload-button">Re-upload</button>
+          </div>
         </div>
         <div id="form">
           <form action="">
@@ -34,6 +57,7 @@
     <script type="module" src="emoji_func.js"></script>
     <script type="module" src="chatMode.js"></script>
     <script type="module" src="default_func.js"></script>
+    <script type="module" src="image_detection.js"></script>
     <script src="https://kit.fontawesome.com/d9a2d2c8d8.js" crossorigin="anonymous"></script>
   </body>
 </html>

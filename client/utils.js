@@ -42,7 +42,6 @@ export const typeText = (element, text) => {
 //generate unique ID for each message
 //usually id = current time & date + a randomly generated hexadecimal string
 export const generateUniqueId = () => {
-    console.log('okkk')
     const timeStamp = Date.now();
     const randNumber = Math.random();
     const hexadecString = randNumber.toString(16); //convert randNumber to hexadecimal, and then convert to String type
@@ -56,7 +55,7 @@ export const generateUniqueId = () => {
     - uniqueId: unique identifier for message
 return a string template (not regular string) because string template (a ES6 feature with `{}`) creates chat bubble with profile image
 */
-export const chatStripe = (isAi, value, uniqueId, div) => {
+export const chatStripe = (isAi, value, uniqueId, div) => {    
     chatContainer.innerHTML += `
     <div class="wrapper ${isAi && 'ai'}">
         <div class="chatbox">

@@ -55,7 +55,7 @@ body {
 @media screen and (max-width: 960px){
   #chat_choice{
     flex: 1.5;
-  } 
+  }
 }
 
 @media screen and (max-width: 768px){
@@ -143,7 +143,7 @@ body {
 
 .message {
   flex: 1;
-  
+
   color: #ffffff;
   font-size: 22px;
   margin-left: 20px;
@@ -257,7 +257,7 @@ form img {
   font-size: 18px;
 }
 
-#create_story_button{
+#create_story_button, .button{
   background-color: #ffffff;
   border-radius: 8px;
   width: 120px;
@@ -278,4 +278,98 @@ form img {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+#chat_container, #emoji_keyboard, #object_detection_container, #form {
+  display: none;
+}
+
+#object_detection_container {
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.dropzone {
+  width: 80%;
+  height: 80%;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #ccc;
+}
+
+#dropzone-content {
+  text-align: center;
+}
+
+.upload-icon {
+  width: 64px;
+  height: 62px;
+  margin-bottom: 16px;
+}
+
+#loading-icon {
+  display: none;
+}
+
+#uploaded-image-container {
+  display: none;
+  height: 70%;
+  text-align: center;
+}
+
+#uploaded-image-content {
+  width: 100%;
+  /* height: 100%; */
+  object-fit: contain;
+  position: relative;
+}
+
+#uploaded-image {
+  width: 400px;
+  /* height: 100%; */
+  object-fit: contain;
+}
+
+.detected-object {
+  position: absolute;
+  border: 1px red dashed;
+  cursor: pointer;
+}
+
+.detected-name {
+  color: red;
+  font-weight: bold;
+}
+
+.detected-object:hover {
+  border: 2px red solid;
+}
+
+.dropzone:hover {
+  border: 2px dashed #FFFFFF;
+  color: #FFFFFF;
+}
+
+.dropzone.dragover {
+  border-color: #aaa;
+}
+
+.dropzone.dragover .dropzone-text {
+  color: #aaa;
+}
+
+#file-input {
+  display: none;
+}
+
+#re-upload-button {
+  margin-top: 16px;
+
 }

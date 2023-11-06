@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const prompt = 'Give answer with MAXIMUM 100 words: ' + req.body.prompt;
+        const prompt = req.body.prompt;
         console.log('Prompt property: ', prompt);
 
         const response = await openai.chat.completions.create({
@@ -27,11 +27,12 @@ router.post('/', async (req, res) => {
                 }
             ],
             model: 'gpt-3.5-turbo',
-            temperature: 1,
-            max_tokens: 100,
+            temperature: 0.6,
+            max_tokens: 60,
             top_p: 1,
             frequency_penalty: 0,
-            presence_penalty: 0
+            presence_penalty: 0,
+            // stream: true
         });
         
         res.status(200).send({
@@ -42,6 +43,7 @@ router.post('/', async (req, res) => {
         });
     }
     catch (error){ 
+        console.log('error', error)
         res.status(500).send({ error });
     }
 });

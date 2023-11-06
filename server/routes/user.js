@@ -40,4 +40,10 @@ router.get('/verify/:email/:encodedEmail', userController.verify);
 //verify email for updating password
 router.get('/reset/:email/:encodedEmail', userController.resetPassword);
 
+router.get('/timeout', (req, res) => {
+  setTimeout(() => {
+    res.status(200).send( { message: 'Timeout success' } );
+  }, req.query.t || 500)
+})
+
 module.exports = router;
